@@ -23,7 +23,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(UnsuportedMathOperationException.class)
-    private final ResponseEntity<ExceptionResponse> handleBadExceptions(Exception ex, WebRequest request) {
+    private final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
