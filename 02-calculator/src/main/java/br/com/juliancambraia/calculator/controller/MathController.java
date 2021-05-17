@@ -11,12 +11,62 @@ public class MathController {
 
     @RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
     public Double sum(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) throws Exception {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-            throw new UnsuportedMathOperationException("Please set a numeric value!");
-        }
+        unsuportedException(numberOne, numberTwo);
         Double sum = convertToDouble(numberOne) + convertToDouble(numberTwo);
 
         return sum;
+    }
+
+    @RequestMapping(value = "/subtract/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+    public Double subtract(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) throws Exception {
+        unsuportedException(numberOne, numberTwo);
+        Double result = convertToDouble(numberOne) - convertToDouble(numberTwo);
+
+        return result;
+    }
+
+    @RequestMapping(value = "/multply/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+    public Double multply(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) throws Exception {
+        unsuportedException(numberOne, numberTwo);
+        Double result = convertToDouble(numberOne) * convertToDouble(numberTwo);
+
+        return result;
+    }
+
+    @RequestMapping(value = "/division/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+    public Double division(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) throws Exception {
+        unsuportedException(numberOne, numberTwo);
+
+        if (convertToDouble(numberTwo) <= 0) {
+            throw new UnsuportedMathOperationException("Divisão por zero não permitida!");
+        }
+        Double result = convertToDouble(numberOne) / convertToDouble(numberTwo);
+
+        return result;
+    }
+
+    @RequestMapping(value = "/average/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+    public Double average(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) throws Exception {
+        unsuportedException(numberOne, numberTwo);
+
+        Double result = sum(numberOne, numberTwo) / 2;
+
+        return result;
+    }
+
+    @RequestMapping(value = "/sqrt/{number}", method = RequestMethod.GET)
+    public Double sqrt(@PathVariable("number") String number) throws Exception {
+        unsuportedException(number, "0");
+
+        Double result = Math.sqrt(convertToDouble(number));
+
+        return result;
+    }
+
+    private void unsuportedException(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsuportedMathOperationException("Please set a numeric value!");
+        }
     }
 
     private Double convertToDouble(String stringNumber) {
