@@ -31,7 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/01-greeting-demo/mvnw
-/01-greeting-demo/mvnw.cmd
-/03-person-rest/mvnw
-/03-person-rest/mvnw.cmd
