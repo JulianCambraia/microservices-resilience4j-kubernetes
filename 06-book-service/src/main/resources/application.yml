@@ -1,5 +1,6 @@
 server:
   port: 8100
+
 spring:
   application:
     name: book-service
@@ -29,7 +30,25 @@ spring:
     serialization:
       fail-on-empty-beans: false
     default-property-inclusion: non_null
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+resilience4j:
+  retry:
+    instances:
+      foo-bar-retry:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true
+  ratelimiter:
+    instances:
+      foo-bar-rate-limiter:
+        limit-for-period: 2
+        limit-refresh-period: 10s
+  bulkhead:
+    instances:
+      foo-bar-bulkhead:
+        max-concurrent-calls: 15
