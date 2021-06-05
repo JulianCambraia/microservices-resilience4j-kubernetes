@@ -16,7 +16,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   config:
-    import: optional:configserver:http://localhost:8888/
+    import: optional:configserver:http://localhost:8761/
   cloud:
     config:
       profile: default
@@ -29,3 +29,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+springdoc:
+  api-docs:
+    path: cambio-service/v3/api-docs
+  show-actuator: true
