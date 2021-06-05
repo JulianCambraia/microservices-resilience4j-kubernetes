@@ -52,3 +52,7 @@ resilience4j:
     instances:
       foo-bar-bulkhead:
         max-concurrent-calls: 15
+springdoc:
+  api-docs:
+    path: book-service/v3/api-docs
+  show-actuator: true
